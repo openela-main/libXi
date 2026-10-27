@@ -5,7 +5,7 @@
 Summary: X.Org X11 libXi runtime library
 Name: libXi
 Version: 1.7.10
-Release: 1%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}
+Release: 2%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}
 License: MIT
 Group: System Environment/Libraries
 URL: http://www.x.org
@@ -16,6 +16,14 @@ Source1:    make-git-snapshot.sh
 %else
 Source0: https://www.x.org/pub/individual/lib/%{name}-%{version}.tar.bz2
 %endif
+
+# CVE-2026-93541
+Patch0: 0001-XQueryDeviceState-check-ValuatorClass-num_valuators-.patch
+# CVE-2026-93542
+Patch1: 0002-size_classes-copy_classes-bound-XI2-class-lengths-to.patch
+# CVE-2026-93543
+Patch2: 0003-size_classes-copy_classes-enforce-XI2-per-type-class.patch
+
 
 BuildRequires: autoconf automake libtool
 BuildRequires: xorg-x11-util-macros
@@ -43,6 +51,9 @@ X.Org X11 libXi development package
 
 %prep
 %setup -q -n %{tarball}-%{?gitdate:%{gitdate}}%{!?gitdate:%{version}}
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 %build
 autoreconf -v --install || exit 1
@@ -75,6 +86,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_mandir}/man3/*.3*
 
 %changelog
+* Mon Oct 26 2026 Olivier Fourdan <ofourdan@redhat.com> - 1.7.10-2
+- CVE fix for CVE-2026-93541, CVE-2026-93542, CVE-2026-93543
+  Resolves: RHEL-270049
+
 * Thu Jun 04 2020 Benjamin Tissoires <benjamin.tissoires@redhat.com> - 1.7.10-1
 - libXi 1.7.10
 
