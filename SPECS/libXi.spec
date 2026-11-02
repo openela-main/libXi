@@ -5,7 +5,7 @@
 Summary: X.Org X11 libXi runtime library
 Name: libXi
 Version: 1.7.10
-Release: 8%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}.1
+Release: 8%{?gitdate:.%{gitdate}git%{gitversion}}%{?dist}.3
 License: MIT
 URL: http://www.x.org
 
@@ -22,6 +22,13 @@ Patch0: 0001-XQueryDeviceState-check-ValuatorClass-num_valuators-.patch
 Patch1: 0002-size_classes-copy_classes-bound-XI2-class-lengths-to.patch
 # CVE-2026-93543
 Patch2: 0003-size_classes-copy_classes-enforce-XI2-per-type-class.patch
+# CVE-2026-109090
+# https://gitlab.freedesktop.org/xorg/lib/libxi/-/commit/4eb9f70b67034ace1abdf785fd8dcba7b6dc739d
+# https://gitlab.freedesktop.org/xorg/lib/libxi/-/commit/8c4dfb762b4a305a2f0f85b1af3fdca395c44359
+Patch3: libXi-1.7.10-CVE-2026-109090.patch
+# CVE-2026-109089
+# https://gitlab.freedesktop.org/xorg/lib/libxi/-/commit/f7836d0a0
+Patch4: 0004-XGetDeviceControl-require-reply-control-to-match-the.patch
 
 
 BuildRequires: make
@@ -53,6 +60,8 @@ X.Org X11 libXi development package
 %patch -P 0 -p1
 %patch -P 1 -p1
 %patch -P 2 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
 
 %build
 autoreconf -v --install || exit 1
@@ -85,6 +94,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %{_mandir}/man3/*.3*
 
 %changelog
+* Thu Oct 29 2026 RHEL Packaging Agent <redhat-ymir-agent@redhat.com> - 1.7.10-8.3
+- CVE-2026-109089 libXi: libXi: Arbitrary code execution via
+  DEVICE_RESOLUTION heap-based buffer overflow
+  Resolves: RHEL-293452
+
+* Thu Oct 29 2026 RHEL Packaging Agent <redhat-ymir-agent@redhat.com> - 1.7.10-8.2
+- CVE-2026-109090 libXi: libXi: Arbitrary code execution via oversized DEVICE_ENABLE reply
+  Resolves: RHEL-293398
+
 * Mon Oct 26 2026 Olivier Fourdan <ofourdan@redhat.com> - 1.7.10-8.1
 - CVE fix for CVE-2026-93541, CVE-2026-93542, CVE-2026-93543
   Resolves: RHEL-270061
