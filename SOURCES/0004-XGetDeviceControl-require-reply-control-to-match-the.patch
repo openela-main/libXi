@@ -1,4 +1,4 @@
-From 03469f109af9ea83b46e07f70a596ff4f33c76e5 Mon Sep 17 00:00:00 2001
+From 96082b5090ecbe44cc2efdd619500b8cd6a112d8 Mon Sep 17 00:00:00 2001
 From: Olivier Fourdan <ofourdan@redhat.com>
 Date: Thu, 1 Oct 2026 15:01:03 +0200
 Subject: [PATCH] XGetDeviceControl: require reply control to match the request
