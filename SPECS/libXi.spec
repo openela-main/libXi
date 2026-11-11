@@ -27,7 +27,6 @@ Patch2: 0003-size_classes-copy_classes-enforce-XI2-per-type-class.patch
 # https://gitlab.freedesktop.org/xorg/lib/libxi/-/commit/8c4dfb762b4a305a2f0f85b1af3fdca395c44359
 Patch3: libXi-1.8.1-CVE-2026-109090.patch
 # CVE-2026-109089
-# https://gitlab.freedesktop.org/xorg/lib/libxi/-/commit/f7836d0a0f45e9e6c2c147c5dea4b6bc08231f2e
 Patch4: 0004-XGetDeviceControl-require-reply-control-to-match-the.patch
 
 
@@ -98,15 +97,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 * Thu Oct 29 2026 RHEL Packaging Agent <redhat-ymir-agent@redhat.com> - 1.8.1-7.3
 - CVE-2026-109089 libXi: libXi: Arbitrary code execution via
   DEVICE_RESOLUTION heap-based buffer overflow
-  Resolves: RHEL-293447
+  Resolves: RHEL-293448
 
 * Thu Oct 29 2026 RHEL Packaging Agent <redhat-ymir-agent@redhat.com> - 1.8.1-7.2
 - CVE-2026-109090 libXi: libXi: Arbitrary code execution via oversized DEVICE_ENABLE reply
-  Resolves: RHEL-293391
+  Resolves: RHEL-293392
 
 * Mon Oct 26 2026 Olivier Fourdan <ofourdan@redhat.com> - 1.8.1-7.1
 - CVE fix for CVE-2026-93541, CVE-2026-93542, CVE-2026-93543
-  Resolves: RHEL-270054
+  Resolves: RHEL-270055
 
 * Tue Oct 29 2024 Troy Dawson <tdawson@redhat.com> - 1.8.1-7
 - Bump release for October 2024 mass rebuild:
